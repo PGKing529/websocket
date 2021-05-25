@@ -1,6 +1,7 @@
 import asyncio
 import websockets
 
+
 # 向服务器端认证，用户名密码通过才能退出循环
 async def auth_system(websocket):
     while True:
@@ -9,6 +10,7 @@ async def auth_system(websocket):
         response_str = await websocket.recv()
         if "congratulation" in response_str:
             return True
+
 
 # 向服务器端发送认证后的消息
 async def send_msg(websocket):
@@ -22,9 +24,10 @@ async def send_msg(websocket):
         recv_text = await websocket.recv()
         print(f"{recv_text}")
 
+
 # 客户端主逻辑
 async def main_logic():
-    async with websockets.connect('ws://127.0.0.1:8000') as websocket:
+    async with websockets.connect('ws://127.0.0.1:8080') as websocket:
         await auth_system(websocket)
 
         await send_msg(websocket)
